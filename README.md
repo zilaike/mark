@@ -1,6 +1,4 @@
-# mark
-
-strongswan
+# strongswan
 
 
 strongSwan is an Open Source IPsec-based VPN solution for Linux and other UNIX based operating systems implementing both the IKEv1 and IKEv2 key exchange protocols.
@@ -9,7 +7,7 @@ strongSwan is an Open Source IPsec-based VPN solution for Linux and other UNIX b
 
 ===============================================================================
 
-docker-compose.yml
+# docker-compose.yml
 
 
 =======================================================================================
@@ -18,7 +16,7 @@ docker-compose.yml
 
 
 
-up and running
+# up and running
 
 ================================================================================
 
