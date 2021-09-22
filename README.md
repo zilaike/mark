@@ -38,7 +38,7 @@ Android: client.cert.p12
 
 ========================================================================================
 
-IKEv2 VPN Server on Docker
+ IKEv2 VPN Server on Docker
 Recipe to build gaomd/ikev2-vpn-server Docker image.
 
 Usage
@@ -64,6 +64,4 @@ Copyright (c) 2016 Mengdi Gao, This software is licensed under the MIT License.
 * IKEv2 protocol requires iOS 8 or later, macOS 10.11 El Capitan or later.
 
 * Install for iOS 8 or later or when your AirDrop fails: Send an E-mail to your iOS device with the .mobileconfig file as attachment, then tap the attachment to bring up and finish the Install Profile screen.
-
-
 
