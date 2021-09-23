@@ -23,9 +23,9 @@ strongSwan is an Open Source IPsec-based VPN solution for Linux and other UNIX b
 
 docker-compose up -d
 
-docker cp strongswan_strongswan_1:/etc/ipsec.d/client.mobileconfig .
+docker cp vimagick_vpn_strongswan_1:/etc/ipsec.d/client.mobileconfig .
 
-docker cp strongswan_strongswan_1:/etc/ipsec.d/client.cert.p12 .
+docker cp vimagick_vpn_strongswan_1:/etc/ipsec.d/client.cert.p12 .
 
 docker-compose logs -f
 
