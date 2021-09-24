@@ -9,7 +9,7 @@ strongSwan is an Open Source IPsec-based VPN solution for Linux and other UNIX b
 
 ===============================================================================
 
-# Dockerfile 构建 自己的镜像
+# Dockerfile build your own image
 
 docker build -t zilaike/strongswan ./
 
@@ -33,12 +33,21 @@ change  VPN_P12_PASSWORD to your own password
 
 docker-compose up -d
 
-docker cp vimagick_vpn_strongswan_1:/etc/ipsec.d/client.mobileconfig .
+docker cp strongswan_vpn:/etc/ipsec.d/client.mobileconfig .
 
-docker cp vimagick_vpn_strongswan_1:/etc/ipsec.d/client.cert.p12 .
+docker cp strongswan_vpn:/etc/ipsec.d/client.cert.p12 .
 
 docker-compose logs -f
 
 Mac/IOS: client.mobileconfig
 
 Android: client.cert.p12       (VPN_P12_PASSWORD is your p12 password eg. secret)
+
+
+ 
+
+
+
+
+ 
+
