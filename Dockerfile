@@ -13,7 +13,8 @@ RUN set -xe \
 COPY init.sh /init.sh
 COPY docker-entrypoint.sh /entrypoint.sh
 
-RUN ["chmod", "+x", "/entrypoint.sh"]
+RUN ["chmod", "777", "/entrypoint.sh"]
+RUN ["chmod", "777", "/init.sh"]
 
 VOLUME /etc/ipsec.d /etc/strongswan.d
 
