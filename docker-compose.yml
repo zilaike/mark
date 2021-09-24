@@ -1,7 +1,7 @@
 version: '2'
 services:
   strongswan:
-    image: vimagick/strongswan
+    image: zilaike/strongswan
     ports:
       - 500:500/udp
       - 4500:4500/udp
@@ -10,9 +10,9 @@ services:
       - /etc/localtime:/etc/localtime
     environment:
       - VPN_DOMAIN=47.242.143.77
-      - VPN_NETWORK=47.242.143.0/24
+      - VPN_NETWORK=47.242.143.0/24/24
       - LAN_NETWORK=192.168.0.0/16
-      - VPN_P12_PASSWORD=secret
+      - VPN_P12_PASSWORD=zilaike-A1
     tmpfs: /run
     privileged: yes
     restart: always
