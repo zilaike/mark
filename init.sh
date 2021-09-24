@@ -45,12 +45,6 @@ conn IPSec-IKEv2
     rightid="client@${VPN_DOMAIN}"
     rightcert=client.cert.pem
     auto=add
-conn android_xauth_psk
-    keyexchange=ikev1
-    leftauth=psk
-    rightauth=psk
-    rightauth2=xauth
-    auto=add
 _EOF_
 
 
