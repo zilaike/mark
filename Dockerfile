@@ -13,6 +13,8 @@ RUN set -xe \
 COPY init.sh /init.sh
 COPY docker-entrypoint.sh /entrypoint.sh
 
+RUN ["chmod", "+x", "/entrypoint.sh"]
+
 VOLUME /etc/ipsec.d /etc/strongswan.d
 
 ENV VPN_DEVICE=eth0
