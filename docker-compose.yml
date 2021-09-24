@@ -2,6 +2,7 @@ version: '2'
 services:
   strongswan:
     image: zilaike/strongswan
+    container_name: strongswan_vpn
     ports:
       - 500:500/udp
       - 4500:4500/udp
