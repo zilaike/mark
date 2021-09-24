@@ -37,6 +37,8 @@ docker cp strongswan_vpn:/etc/ipsec.d/client.mobileconfig .
 
 docker cp strongswan_vpn:/etc/ipsec.d/client.cert.p12 .
 
+docker cp strongswan_vpn:/etc/ipsec.d/certs/client.cert.pem .
+
 docker-compose logs -f
 
 Mac/IOS: client.mobileconfig
