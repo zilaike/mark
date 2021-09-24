@@ -51,14 +51,6 @@ conn android_xauth_psk
     rightauth=psk
     rightauth2=xauth
     auto=add
-conn windows7
-    keyexchange=ikev2
-    ike=aes256-sha1-modp1024!
-    rekey=no
-    leftauth=pubkey
-    rightauth=eap-mschapv2
-    eap_identity=%any
-    auto=add
 _EOF_
 
 
