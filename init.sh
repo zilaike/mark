@@ -24,7 +24,7 @@ config setup
 conn iOS_cert
     keyexchange=ikev1
     fragmentation=yes
-    left=%defaultroute
+    left=%any
     leftauth=pubkey
     leftsubnet=0.0.0.0/0
     leftcert=server.cert.pem
@@ -39,7 +39,7 @@ conn iOS_cert
 
 conn android_xauth_psk
     keyexchange=ikev1
-    left=%defaultroute
+    left=%any
     leftauth=psk
     leftsubnet=0.0.0.0/0
     right=%any
@@ -52,7 +52,7 @@ conn android_xauth_psk
 
 conn networkmanager-strongswan
     keyexchange=ikev2
-    left=%defaultroute
+    left=%any
     leftauth=pubkey
     leftsubnet=0.0.0.0/0
     leftcert=server.cert.pem
@@ -69,7 +69,7 @@ conn ios_ikev2
     ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048!
     esp=aes256-sha256,3des-sha1,aes256-sha1!
     rekey=no
-    left=%defaultroute
+    left=%any
     leftid="${VPN_DOMAIN}"
     leftsendcert=always
     leftsubnet=0.0.0.0/0
@@ -89,7 +89,7 @@ conn windows7
     keyexchange=ikev2
     ike=aes256-sha1-modp1024!
     rekey=no
-    left=%defaultroute
+    left=%any
     leftauth=pubkey
     leftsubnet=0.0.0.0/0
     leftcert=server.cert.pem
