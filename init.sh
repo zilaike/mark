@@ -42,22 +42,19 @@ conn IPSec-IKEv2
     leftsendcert=always
     leftauth=pubkey
     rightauth=pubkey
+    rightauth2=eap-mschapv2
     rightid="${VPN_DOMAIN}"
     rightcert=client.cert.pem
     auto=add
 conn android_xauth_psk
     keyexchange=ikev2
-    ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048!
-    esp=aes256-sha256,3des-sha1,aes256-sha1!
     rekey=no
     left=%any
     leftid="${VPN_DOMAIN}"
     leftsendcert=always
-    leftsubnet=0.0.0.0/0
-    leftcert=server.cert.pem
-    right=%any
-    rightauth=eap-mschapv2
-    rightsourceip=${VPN_NETWORK}
+    leftauth=pubkey
+    rightauth=pubkey
+    rightauth2=eap-mschapv2
     rightsendcert=never
     eap_identity=%any
     dpdaction=clear
