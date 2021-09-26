@@ -20,36 +20,95 @@ fi
 cat > /etc/ipsec.d/ipsec.conf <<_EOF_
 config setup
     uniqueids=never
-    charondebug="cfg 2, dmn 2, ike 2, net 2"
-conn %default
-    keyexchange=ike
-    dpdaction=clear
-    dpddelay=300s
-    rekey=no
-    left=%any
-    leftca=ca.cert.pem
-    leftcert=server.cert.pem
+
+conn iOS_cert
+    keyexchange=ikev1
+    fragmentation=yes
+    left=%defaultroute
+    leftauth=pubkey
     leftsubnet=0.0.0.0/0
+    leftcert=server.cert.pem
     right=%any
+    rightauth=pubkey
+    rightauth2=xauth
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
     rightsubnet=${LAN_NETWORK}
-conn IPSec-IKEv2
+    rightcert=client.cert.pem
+    auto=add
+
+conn android_xauth_psk
+    keyexchange=ikev1
+    left=%defaultroute
+    leftauth=psk
+    leftsubnet=0.0.0.0/0
+    right=%any
+    rightauth=psk
+    rightauth2=xauth
+    rightdns=${VPN_DNS}
+    rightsourceip=${VPN_NETWORK}
+    rightsubnet=${LAN_NETWORK}
+    auto=add
+
+conn networkmanager-strongswan
     keyexchange=ikev2
-    ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
+    left=%defaultroute
+    leftauth=pubkey
+    leftsubnet=0.0.0.0/0
+    leftcert=server.cert.pem
+    right=%any
+    rightauth=pubkey
+    rightdns=${VPN_DNS}
+    rightsourceip=${VPN_NETWORK}
+    rightsubnet=${LAN_NETWORK}
+    rightcert=client.cert.pem
+    auto=add
+
+conn ios_ikev2
+    keyexchange=ikev2
+    ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048!
     esp=aes256-sha256,3des-sha1,aes256-sha1!
+    rekey=no
+    left=%defaultroute
     leftid="${VPN_DOMAIN}"
     leftsendcert=always
+    leftsubnet=0.0.0.0/0
+    leftcert=server.cert.pem
+    right=%any
+    rightauth=eap-mschapv2
+    rightdns=${VPN_DNS}
+    rightsourceip=${VPN_NETWORK}
+    rightsubnet=${LAN_NETWORK}
+    rightsendcert=never
+    eap_identity=%any
+    dpdaction=clear
+    fragmentation=yes
+    auto=add
+
+conn windows7
+    keyexchange=ikev2
+    ike=aes256-sha1-modp1024!
+    rekey=no
+    left=%defaultroute
     leftauth=pubkey
-    rightauth=pubkey
-    rightid="client@${VPN_DOMAIN}"
-    rightcert=client.cert.pem
+    leftsubnet=0.0.0.0/0
+    leftcert=server.cert.pem
+    right=%any
+    rightauth=eap-mschapv2
+    rightdns=${VPN_DNS}
+    rightsourceip=${VPN_NETWORK}
+    rightsubnet=${LAN_NETWORK}
+    rightsendcert=never
+    eap_identity=%any
     auto=add
 _EOF_
 
 
 cat > /etc/ipsec.d/ipsec.secrets <<_EOF_
 : RSA server.pem
+: PSK "myPSKkey"
+: XAUTH "myXAUTHPass"
+zilaike %any : EAP "zilaike-A1"
 _EOF_
 
 
