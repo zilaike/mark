@@ -48,30 +48,12 @@ conn IPSec-IKEv2
 _EOF_
 
 
-# ipsec.secrets - strongSwan IPsec secrets file
-#使用证书验证时的服务器端私钥
-#格式 : RSA <private key file> [ <passphrase> | %prompt ]
-#: RSA server.pem
-
-#使用预设加密密钥, 越长越好
-#格式 [ <id selectors> ] : PSK <secret>
-#: PSK "zilaike-A1"
-
-#EAP 方式, 格式同 psk 相同 (用户名/密码 例：oneAA/oneTT)
-#zilaike %any : EAP "zilaike-A1"
-
-#XAUTH 方式, 只适用于 IKEv1
-#格式 [ <servername> ] <username> : XAUTH "<password>"
-#zilaike %any : XAUTH "zilaike-A1"
-
-
 cat > /etc/ipsec.d/ipsec.secrets <<_EOF_
 : RSA server.pem
-zilaike %any : EAP "zilaike-A1"
 _EOF_
 
 
-# gen ca key and cert =====>    Generate the private key used to sign the CA certificate
+# gen ca key and cert
 ipsec pki --gen --outform pem > /etc/ipsec.d/private/ca.pem
 
 ipsec pki --self \
@@ -81,7 +63,7 @@ ipsec pki --self \
           --lifetime 3650 \
           --outform pem > /etc/ipsec.d/cacerts/ca.cert.pem
 
-# gen server key and cert =====>    Generate the private key used to sign the server certificate
+# gen server key and cert
 ipsec pki --gen --outform pem > /etc/ipsec.d/private/server.pem
 
 ipsec pki --pub --in /etc/ipsec.d/private/server.pem |
@@ -90,21 +72,20 @@ ipsec pki --pub --in /etc/ipsec.d/private/server.pem |
               --san="${VPN_DOMAIN}" --flag serverAuth --flag ikeIntermediate \
               --outform pem > /etc/ipsec.d/certs/server.cert.pem
 
-# gen client key and cert =====>    Generate the private key used to sign the client certificate
+# gen client key and cert
 ipsec pki --gen --outform pem > /etc/ipsec.d/private/client.pem
 
 ipsec pki --pub --in /etc/ipsec.d/private/client.pem |
     ipsec pki --issue \
               --cacert /etc/ipsec.d/cacerts/ca.cert.pem \
-              --cakey /etc/ipsec.d/private/ca.pem --dn "C=CN, O=strongSwan, CN=${VPN_DOMAIN}" \
-              --san="${VPN_DOMAIN}" \
+              --cakey /etc/ipsec.d/private/ca.pem --dn "C=CN, O=strongSwan, CN=client@${VPN_DOMAIN}" \
+              --san="client@${VPN_DOMAIN}" \
               --outform pem > /etc/ipsec.d/certs/client.cert.pem
 
-#   Export the key in pkcs13 format
 openssl pkcs12 -export \
                -inkey /etc/ipsec.d/private/client.pem \
                -in /etc/ipsec.d/certs/client.cert.pem \
-               -name "${VPN_DOMAIN}" \
+               -name "client@${VPN_DOMAIN}" \
                -certfile /etc/ipsec.d/cacerts/ca.cert.pem \
                -caname "strongSwan Root CA" \
                -out /etc/ipsec.d/client.cert.p12 \
@@ -206,7 +187,7 @@ $(base64 /etc/ipsec.d/cacerts/ca.cert.pem)
      <integer>1440</integer>
     </dict>
     <key>LocalIdentifier</key>
-    <string>${VPN_DOMAIN}</string>
+    <string>client@${VPN_DOMAIN}</string>
     <key>PayloadCertificateUUID</key>
     <string>${UUID1}</string>
     <key>RemoteAddress</key>
