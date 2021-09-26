@@ -21,19 +21,6 @@ cat > /etc/ipsec.d/ipsec.conf <<_EOF_
 config setup
     uniqueids=never
     charondebug="cfg 2, dmn 2, ike 2, net 2"
-conn IKE
-    keyexchange=ike
-    dpdaction=clear
-    dpddelay=300s
-    rekey=no
-    left=%any
-    leftca=ca.cert.pem
-    leftcert=server.cert.pem
-    leftsubnet=0.0.0.0/0
-    right=%any
-    rightdns=${VPN_DNS}
-    rightsourceip=${VPN_NETWORK}
-    rightsubnet=${LAN_NETWORK}
 conn IPSec-IKEv2
     keyexchange=ikev2
     ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
@@ -55,29 +42,6 @@ conn IPSec-IKEv2
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
     rightsubnet=${LAN_NETWORK}
-    auto=add
-conn Android
-    keyexchange=ikev2
-    ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
-    esp=aes256-sha256,3des-sha1,aes256-sha1!
-    dpdaction=clear
-    dpddelay=300s
-    rekey=no
-    left=%any
-    leftid="${VPN_DOMAIN}"
-    leftsendcert=always
-    leftcert=server.cert.pem
-    leftsubnet=0.0.0.0/0
-    rightauth=eap-mschapv2
-    rightid="${VPN_DOMAIN}"
-    right=%any
-    rightsendcert=never
-    rightdns=${VPN_DNS}
-    rightsourceip=${VPN_NETWORK}
-    rightsubnet=${LAN_NETWORK}
-    eap_identity=%any
-    dpdaction=clear
-    fragmentation=yes
     auto=add
 _EOF_
 
