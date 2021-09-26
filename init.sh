@@ -55,10 +55,7 @@ conn iOS_cert
     right=%any
     rightauth=pubkey
     rightauth2=xauth
-    rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
-    rightsubnet=${LAN_NETWORK}
-    rightid="client@${VPN_DOMAIN}"
     rightcert=client.cert.pem
     auto=add
 
@@ -70,9 +67,7 @@ conn android_xauth_psk
     right=%any
     rightauth=psk
     rightauth2=xauth
-    rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
-    rightsubnet=${LAN_NETWORK}
     auto=add
 
 conn networkmanager-strongswan
@@ -83,12 +78,8 @@ conn networkmanager-strongswan
     leftcert=server.cert.pem
     right=%any
     rightauth=pubkey
-    rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
-    rightsubnet=${LAN_NETWORK}
-    rightid="client@${VPN_DOMAIN}"
     rightcert=client.cert.pem
-    eap_identity=%any
     auto=add
 
 conn ios_ikev2
@@ -103,9 +94,7 @@ conn ios_ikev2
     leftcert=server.cert.pem
     right=%any
     rightauth=eap-mschapv2
-    rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
-    rightsubnet=${LAN_NETWORK}
     rightsendcert=never
     eap_identity=%any
     dpdaction=clear
@@ -122,9 +111,7 @@ conn windows7
     leftcert=server.cert.pem
     right=%any
     rightauth=eap-mschapv2
-    rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
-    rightsubnet=${LAN_NETWORK}
     rightsendcert=never
     eap_identity=%any
     auto=add
