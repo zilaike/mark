@@ -42,7 +42,6 @@ conn IPSec-IKEv2
     leftsendcert=always
     leftauth=pubkey
     rightauth=pubkey
-    rightauth2=eap-mschapv2
     rightid="${VPN_DOMAIN}"
     rightcert=client.cert.pem
     auto=add
@@ -53,8 +52,10 @@ conn android_xauth_psk
     leftid="${VPN_DOMAIN}"
     leftsendcert=always
     leftauth=pubkey
-    rightauth=pubkey
-    rightauth2=eap-mschapv2
+    leftauth2=psk
+    rightauth=eap-mschapv2
+    rightauth2=psk
+    rightauth3=xauth
     rightsendcert=never
     eap_identity=%any
     dpdaction=clear
