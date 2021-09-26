@@ -166,6 +166,7 @@ ipsec pki --pub --in /etc/ipsec.d/private/client.pem |
               --cacert /etc/ipsec.d/cacerts/ca.cert.pem \
               --cakey /etc/ipsec.d/private/ca.pem --dn "C=CN, O=strongSwan, CN=client@${VPN_DOMAIN}" \
               --san="client@${VPN_DOMAIN}" \
+              --san="${VPN_DOMAIN}" \
               --outform pem > /etc/ipsec.d/certs/client.cert.pem
 
 openssl pkcs12 -export \
