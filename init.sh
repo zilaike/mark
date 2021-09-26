@@ -58,6 +58,7 @@ conn iOS_cert
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
     rightsubnet=${LAN_NETWORK}
+    rightid="client@${VPN_DOMAIN}"
     rightcert=client.cert.pem
     auto=add
 
@@ -85,7 +86,9 @@ conn networkmanager-strongswan
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
     rightsubnet=${LAN_NETWORK}
+    rightid="client@${VPN_DOMAIN}"
     rightcert=client.cert.pem
+    eap_identity=%any
     auto=add
 
 conn ios_ikev2
