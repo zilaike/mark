@@ -33,13 +33,7 @@ change  VPN_P12_PASSWORD to your own password
 
 docker-compose up -d
 
-docker cp strongswan_vpn:/etc/ipsec.d/client.mobileconfig .
-
-docker cp strongswan_vpn:/etc/ipsec.d/client.cert.p12 .
-
-docker cp strongswan_vpn:/etc/ipsec.d/certs/client.cert.pem .
-
-docker-compose logs -f
+cd /usr/local/software/vpn && rm -rf * && docker cp strongswan_vpn:/etc/ipsec.d/client.mobileconfig /usr/local/software/vpn && docker cp strongswan_vpn:/etc/ipsec.d/client.cert.p12 /usr/local/software/vpn && docker cp strongswan_vpn:/etc/ipsec.d/certs/client.cert.pem /usr/local/software/vpn && cd /usr/local/software/mark && docker-compose logs -f 
 
 Mac/IOS: client.mobileconfig
 
