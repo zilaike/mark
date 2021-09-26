@@ -33,7 +33,7 @@ conn %default
     right=%any
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
-    rightsubnets=${LAN_NETWORK}
+    rightsubnet=${LAN_NETWORK}
 conn IPSec-IKEv2
     keyexchange=ikev2
     ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
@@ -46,10 +46,22 @@ conn IPSec-IKEv2
     rightcert=client.cert.pem
     auto=add
 conn android_xauth_psk
-    keyexchange=ikev1
-    leftauth=psk
-    rightauth=psk
-    rightauth2=xauth
+    keyexchange=ikev2
+    ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048!
+    esp=aes256-sha256,3des-sha1,aes256-sha1!
+    rekey=no
+    left=%any
+    leftid="${VPN_DOMAIN}"
+    leftsendcert=always
+    leftsubnet=0.0.0.0/0
+    leftcert=server.cert.pem
+    right=%any
+    rightauth=eap-mschapv2
+    rightsourceip=${VPN_NETWORK}
+    rightsendcert=never
+    eap_identity=%any
+    dpdaction=clear
+    fragmentation=yes
     auto=add
 _EOF_
 
