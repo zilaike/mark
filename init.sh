@@ -20,7 +20,31 @@ fi
 cat > /etc/ipsec.d/ipsec.conf <<_EOF_
 config setup
     uniqueids=never
-
+    charondebug="cfg 2, dmn 2, ike 2, net 2"
+conn %default
+    keyexchange=ike
+    dpdaction=clear
+    dpddelay=300s
+    rekey=no
+    left=%any
+    leftca=ca.cert.pem
+    leftcert=server.cert.pem
+    leftsubnet=0.0.0.0/0
+    right=%any
+    rightdns=${VPN_DNS}
+    rightsourceip=${VPN_NETWORK}
+    rightsubnets=${LAN_NETWORK}
+conn IPSec-IKEv2
+    keyexchange=ikev2
+    ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
+    esp=aes256-sha256,3des-sha1,aes256-sha1!
+    leftid="${VPN_DOMAIN}"
+    leftsendcert=always
+    leftauth=pubkey
+    rightauth=pubkey
+    rightid="client@${VPN_DOMAIN}"
+    rightcert=client.cert.pem
+    auto=add
 conn iOS_cert
     keyexchange=ikev1
     fragmentation=yes
@@ -106,8 +130,8 @@ _EOF_
 
 cat > /etc/ipsec.d/ipsec.secrets <<_EOF_
 : RSA server.pem
-: PSK "myPSKkey"
-: XAUTH "myXAUTHPass"
+: PSK "zilaike-A1"
+: XAUTH "zilaike-A1"
 zilaike %any : EAP "zilaike-A1"
 _EOF_
 

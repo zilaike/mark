@@ -19,7 +19,7 @@ RUN ["chmod", "777", "/init.sh"]
 VOLUME /etc/ipsec.d /etc/strongswan.d
 
 ENV VPN_DEVICE=eth0
-ENV VPN_NETWORK=47.242.143.0/24
+ENV VPN_NETWORK=10.31.0.0/24
 ENV LAN_NETWORK=192.168.0.0/16
 ENV VPN_DNS=8.8.8.8,8.8.4.4
 
