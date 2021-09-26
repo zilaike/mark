@@ -47,6 +47,8 @@ conn IPSec-IKEv2
     auto=add
 conn android_xauth_psk
     keyexchange=ikev2
+    ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
+    esp=aes256-sha256,3des-sha1,aes256-sha1!
     rekey=no
     left=%any
     leftid="${VPN_DOMAIN}"
