@@ -279,6 +279,8 @@ function get_key(){
     cp -f ca.cert.pem /usr/local/etc/ipsec.d/cacerts/
     cp -f server.cert.pem /usr/local/etc/ipsec.d/certs/
     cp -f server.pem /usr/local/etc/ipsec.d/private/
+    cp -f server.pub.pem /usr/local/etc/ipsec.d/certs
+
     cp -f client.cert.pem /usr/local/etc/ipsec.d/certs/
     cp -f client.pem  /usr/local/etc/ipsec.d/private/
     echo "Cert copy completed"
