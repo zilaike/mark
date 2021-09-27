@@ -319,15 +319,25 @@ function import_cert(){
 function create_cert(){
     cd $cur_dir
     cd my_key
+    #1.生成一个私钥
     ipsec pki --gen --outform pem > ca.pem
+    #2.基于私钥签名一个CA证书
     ipsec pki --self --in ca.pem --dn "C=${my_cert_c}, O=${my_cert_o}, CN=${my_cert_cn}" --ca --outform pem >ca.cert.pem
+    #3.生成服务器私钥
     ipsec pki --gen --outform pem > server.pem
+    #4.从服务器私钥中提取公钥
+    ipsec pki --pub --in server.pem --outform pem > server.pub.pem
+    #5.用CA证书签发服务器证书
     ipsec pki --pub --in server.pem | ipsec pki --issue --cacert ca.cert.pem \
-    --cakey ca.pem --dn "C=${my_cert_c}, O=${my_cert_o}, CN=${vps_ip}" \
+    --cakey ca.pem --in server.pub.pem  --dn "C=${my_cert_c}, O=${my_cert_o}, CN=${vps_ip}" \
     --san="${vps_ip}" --flag serverAuth --flag ikeIntermediate \
     --outform pem > server.cert.pem
+    #6.生成客户端私钥
     ipsec pki --gen --outform pem > client.pem
-    ipsec pki --pub --in client.pem | ipsec pki --issue --cacert ca.cert.pem --cakey ca.pem --dn "C=${my_cert_c}, O=${my_cert_o}, CN=VPN Client" --outform pem > client.cert.pem
+    #7.从客户端私钥中提取出公钥
+    ipsec pki --pub --in client.pem --outform pem > client.pub.pem
+    #8.用CA证书签发客户端证书
+    ipsec pki --issue --cacert ca.cert.pem --cakey ca.pem  --in client.pub.pem  --dn "C=${my_cert_c}, O=${my_cert_o}, CN=VPN Client" --outform pem > client.cert.pem
     echo "configure the pkcs12 cert password(Can be empty):"
     openssl pkcs12 -export -inkey client.pem -in client.cert.pem -name "client" -certfile ca.cert.pem -caname "${my_cert_cn}"  -out client.cert.p12
 }
