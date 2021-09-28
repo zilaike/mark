@@ -450,7 +450,7 @@ function configure_secrets(){
     cat > /usr/local/etc/ipsec.secrets<<-EOF
 : RSA server.pem
 : PSK "zilaike-A1"
-: XAUTH "zilaike-A1"
+zilaike : XAUTH "zilaike-A1"
 zilaike %any : EAP "zilaike-A1"
 EOF
 }
