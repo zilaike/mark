@@ -211,10 +211,9 @@ function pre_install(){
     cd $cur_dir
 }
 
-
 # Download strongswan
 function download_files(){
-    strongswan_version='strongswan-5.8.1'
+    strongswan_version='strongswan-5.9.3'
     strongswan_file="$strongswan_version.tar.gz"
     if [ -f $strongswan_file ];then
         echo -e "$strongswan_file [$(__green "found")]"
