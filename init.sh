@@ -26,11 +26,11 @@ conn %default
     dpdaction=clear
     dpddelay=300s
     rekey=no
-    left=%any
+    left=%any4
     leftca=ca.cert.pem
     leftcert=server.cert.pem
     leftsubnet=0.0.0.0/0
-    right=%any
+    right=%any4
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
     rightsubnet=${LAN_NETWORK}
@@ -56,7 +56,7 @@ conn eap_ikev2
      leftsendcert=always
      rightauth=eap-mschapv2
      rightsendcert=never
-     eap_identity=%any
+     eap_identity=%any4
      fragmentation=yes
      auto=add
 
