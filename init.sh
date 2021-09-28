@@ -21,6 +21,7 @@ cat > /etc/ipsec.d/ipsec.conf <<_EOF_
 config setup
     uniqueids=never
     charondebug="cfg 2, dmn 2, ike 2, net 2"
+
 conn %default
     keyexchange=ike
     dpdaction=clear
@@ -34,6 +35,7 @@ conn %default
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
     rightsubnets=${LAN_NETWORK}
+
 conn IPSec-IKEv2
     keyexchange=ikev2
     ike=aes256-sha256-modp1024,3des-sha1-modp1024,aes256-sha1-modp1024!
@@ -45,6 +47,7 @@ conn IPSec-IKEv2
     rightid="client@${VPN_DOMAIN}"
     rightcert=client.cert.pem
     auto=add
+
  conn eap_ikev2
      keyexchange=ikev2
      ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048!
@@ -57,6 +60,7 @@ conn IPSec-IKEv2
      eap_identity=%any
      fragmentation=yes
      auto=add
+
 _EOF_
 
 
