@@ -8,6 +8,12 @@
 
 /init.sh
 
+    cat > /etc/sysctl.d/10-ipsec.conf<<-EOF
+net.ipv4.ip_forward=1
+EOF
+    sysctl --system
+
+
 iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -s ${VPN_NETWORK}  -j ACCEPT
 iptables -A INPUT -i ${VPN_DEVICE} -p esp -j ACCEPT
