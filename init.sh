@@ -60,7 +60,7 @@ conn IPSec-IKEv2
     leftcert=server.cert.pem
     right=%any
     rightauth=eap-mschapv2
-    rightsourceip=10.31.2.0/24
+    rightsourceip=${VPN_NETWORK}
     rightsendcert=never
     eap_identity=%any
     dpdaction=clear
