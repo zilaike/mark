@@ -28,6 +28,7 @@ conn %default
     dpddelay=300s
     rekey=no
     left=%any
+    leftca=ca.cert.pem
     leftcert=server.cert.pem
     leftsubnet=0.0.0.0/0
     right=%any
