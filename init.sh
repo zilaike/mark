@@ -44,7 +44,7 @@ conn IPSec-IKEv2
     leftsendcert=always
     leftauth=pubkey
     rightauth=pubkey
-    rightid="client@${VPN_DOMAIN}"
+    rightid="my_client"
     rightcert=client.cert.pem
     auto=add
 
@@ -97,14 +97,14 @@ ipsec pki --gen --outform pem > /etc/ipsec.d/private/client.pem
 ipsec pki --pub --in /etc/ipsec.d/private/client.pem |
     ipsec pki --issue \
               --cacert /etc/ipsec.d/cacerts/ca.cert.pem \
-              --cakey /etc/ipsec.d/private/ca.pem --dn "C=CN, O=strongSwan, CN=client@${VPN_DOMAIN}" \
-              --san="client@${VPN_DOMAIN}" \
+              --cakey /etc/ipsec.d/private/ca.pem --dn "C=CN, O=strongSwan, CN=my_client" \
+              --san="my_client" \
               --outform pem > /etc/ipsec.d/certs/client.cert.pem
 
 openssl pkcs12 -export \
                -inkey /etc/ipsec.d/private/client.pem \
                -in /etc/ipsec.d/certs/client.cert.pem \
-               -name "client@${VPN_DOMAIN}" \
+               -name "my_client" \
                -certfile /etc/ipsec.d/cacerts/ca.cert.pem \
                -caname "strongSwan Root CA" \
                -out /etc/ipsec.d/client.cert.p12 \
@@ -206,7 +206,7 @@ $(base64 /etc/ipsec.d/cacerts/ca.cert.pem)
      <integer>1440</integer>
     </dict>
     <key>LocalIdentifier</key>
-    <string>client@${VPN_DOMAIN}</string>
+    <string>my_client</string>
     <key>PayloadCertificateUUID</key>
     <string>${UUID1}</string>
     <key>RemoteAddress</key>
