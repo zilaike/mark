@@ -20,7 +20,6 @@ fi
 cat > /etc/ipsec.d/ipsec.conf <<_EOF_
 config setup
     uniqueids=never
-    charondebug="cfg 2, dmn 2, ike 2, net 2"
 
 conn %default
     keyexchange=ike
