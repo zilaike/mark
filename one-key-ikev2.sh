@@ -447,7 +447,7 @@ EOF
 
 # configure the ipsec.secrets
 function configure_secrets(){
-cat > /usr/local/etc/ipsec.secrets<<-EOF
+    cat > /usr/local/etc/ipsec.secrets<<-EOF
 : RSA server.pem
 : PSK "zilaike-A1"
 zilaike : XAUTH "zilaike-A1"
