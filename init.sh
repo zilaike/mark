@@ -33,7 +33,7 @@ conn %default
     right=%any
     rightdns=${VPN_DNS}
     rightsourceip=${VPN_NETWORK}
-    rightsubnets=${LAN_NETWORK}
+    rightsubnet=${LAN_NETWORK}
 
 conn IPSec-IKEv2
     keyexchange=ikev2
