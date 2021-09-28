@@ -54,7 +54,7 @@ cat > /etc/ipsec.d/ipsec.secrets <<_EOF_
 : RSA server.pem
 : PSK "zilaike-A1"
 zilaike : XAUTH "zilaike-A1"
-zilaike %any : EAP "zilaike-A1"
+zilaike %any4 : EAP "zilaike-A1"
 _EOF_
 
 
